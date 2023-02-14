@@ -1,6 +1,7 @@
 package com.didact.springbootmall.controller;
 
 import com.didact.springbootmall.constant.ProductCategory;
+import com.didact.springbootmall.dto.ProductQueryParams;
 import com.didact.springbootmall.dto.ProductRequest;
 import com.didact.springbootmall.model.Product;
 import com.didact.springbootmall.service.ProductService;
@@ -24,7 +25,11 @@ public class ProductController {
             @RequestParam(required = false) ProductCategory category,
             @RequestParam(required = false) String search
     ) {
-        List<Product> productList = productService.getProducts(category, search);
+        ProductQueryParams productQueryParams = new ProductQueryParams();
+        productQueryParams.setCategory(category);
+        productQueryParams.setSearch(search);
+
+        List<Product> productList = productService.getProducts(productQueryParams);
 
         return ResponseEntity.status(HttpStatus.OK).body(productList);
     }
