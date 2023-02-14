@@ -4,7 +4,11 @@ import com.didact.springbootmall.dao.ProductDao;
 import com.didact.springbootmall.dto.ProductRequest;
 import com.didact.springbootmall.model.Product;
 
+import java.util.List;
+
 public interface ProductService {
+
+    List<Product> getProducts();
 
     Product getProductById(Integer productId);
 
@@ -13,4 +17,5 @@ public interface ProductService {
     void updateProduct(Integer productId, ProductRequest productRequest);
 
     void deleteProductById(Integer productId);
+
 }
