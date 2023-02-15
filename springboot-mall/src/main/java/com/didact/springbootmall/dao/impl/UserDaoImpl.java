@@ -5,12 +5,17 @@ import com.didact.springbootmall.dto.UserRegisterRequest;
 import com.didact.springbootmall.model.User;
 import com.didact.springbootmall.rowmapper.UserRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +33,23 @@ public class UserDaoImpl implements UserDao {
 
         Map<String, Object> map = new HashMap<>();
         map.put("userId", userId);
+
+        List<User> userList = namedParameterJdbcTemplate.query(sql, map, new UserRowMapper());
+
+        if (userList.size() > 0) {
+            return userList.get(0);
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        String sql = "SELECT user_id, email, password, created_date, last_modified_date " +
+                "FROM user WHERE email = :email";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("email", email);
 
         List<User> userList = namedParameterJdbcTemplate.query(sql, map, new UserRowMapper());
 
