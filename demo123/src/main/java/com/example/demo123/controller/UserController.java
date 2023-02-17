@@ -1,9 +1,9 @@
-package com.didact.springbootmall.controller;
+package com.example.demo123.controller;
 
-import com.didact.springbootmall.dto.UserLoginRequest;
-import com.didact.springbootmall.dto.UserRegisterRequest;
-import com.didact.springbootmall.model.User;
-import com.didact.springbootmall.service.UserService;
+import com.example.demo123.dto.UserLoginRequest;
+import com.example.demo123.dto.UserRegisterRequest;
+import com.example.demo123.model.User;
+import com.example.demo123.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Validated
 public class UserController {
 
     @Autowired

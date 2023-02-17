@@ -1,9 +1,9 @@
-package com.didact.springbootmall.dto;
+package com.example.demo123.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
-public class UserRegisterRequest {
+public class UserLoginRequest {
 
     @NotBlank
     @Email
