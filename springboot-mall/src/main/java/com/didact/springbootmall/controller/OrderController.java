@@ -5,6 +5,8 @@ import com.didact.springbootmall.dto.OrderQueryParams;
 import com.didact.springbootmall.model.Order;
 import com.didact.springbootmall.service.OrderService;
 import com.didact.springbootmall.util.Page;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "測試 OrderController", description = "User REST API")
 @RestController
 @Validated
 public class OrderController {
@@ -23,6 +26,7 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    @Operation(summary = "取得所有訂單")
     @GetMapping("/users/{userId}/orders")
     public ResponseEntity<Page<Order>> getOrders(
             @PathVariable Integer userId,
@@ -50,6 +54,7 @@ public class OrderController {
         return ResponseEntity.status(HttpStatus.OK).body(page);
     }
 
+    @Operation(description = "創建訂單")
     @PostMapping("/users/{userId}/orders")
     public ResponseEntity<?> createOrder(@PathVariable Integer userId,
                                          @RequestBody @Valid CreateOrderRequest createOrderRequest) {
